@@ -13,18 +13,23 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=31.6333946&lng=74.86724269999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
+      "https://corsproxy.io/?url=" + encodeURIComponent("https://www.swiggy.com/dapi/restaurants/list/v5?lat=31.6333946&lng=74.86724269999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"),
     );
     const json = await data.json();
     console.log(json);
-    setListOfRestaurants(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
+
+    // Find the card that actually contains the restaurant data
+    const cards = json?.data?.cards || [];
+    const restaurantCard = cards.find(
+      (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
-    setCopyResList(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    )
+
+    const restaurants =
+      restaurantCard?.card?.card?.gridElements?.infoWithStyle?.restaurants ||
+      [];
+
+    setListOfRestaurants(restaurants);
+    setCopyResList(restaurants);
   };
 
   return listOfRestaurants.length === 0 ? (
@@ -44,12 +49,10 @@ const Body = () => {
           <button
             className="search-btn"
             onClick={() => {
-              
               let search_filter = listOfRestaurants.filter((res) =>
-                res.info.name.toLowerCase().includes(searchText.toLowerCase())
+                res.info.name.toLowerCase().includes(searchText.toLowerCase()),
               );
               setCopyResList(search_filter);
-              
             }}
           >
             Search
@@ -58,10 +61,10 @@ const Body = () => {
         <button
           className="filter-btn"
           onClick={() => {
-            let filtedRedresList = listOfRestaurants.filter(
+            let filteredResList = listOfRestaurants.filter(
               (res) => res.info.avgRating >= 4.5,
             );
-            setCopyResList(filtedRedresList);
+            setCopyResList(filteredResList);
           }}
         >
           Top Rated Restaurants
