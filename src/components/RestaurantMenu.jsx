@@ -1,23 +1,12 @@
-import { useEffect, useState } from "react";
-import { MENU_API } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
-
   const { resId } = useParams();
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
+  const resInfo = useRestaurantMenu(resId);
 
-  const fetchMenu = async () => {
-    const data = await fetch(MENU_API + resId);
-    const json = await data.json();
-    console.log(json);
-    setResInfo(json.data);
-  };
   if (resInfo === null) return <Shimmer />;
 
   // one tiny change in a nested API response and your whole app goes dark. Hardcoding indexes like cards[2] is definitely a "ticking time bomb."
