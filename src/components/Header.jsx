@@ -16,6 +16,8 @@ const Header = () => {
           <li> <Link to="/" >Home</Link> </li>
           <li> <Link to="/about" >About Us</Link></li>
           <li> <Link to="/contact" >Contact Us</Link></li>
+          <li> <Link to="/grocery" >Grocery</Link></li>
+
           <li>Cart</li>
           <button className="log-btn"
             onClick={() =>{
