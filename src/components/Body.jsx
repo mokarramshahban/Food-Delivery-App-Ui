@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import { RestaurantCard, isOpenRestaurant } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { RESTAURANT_API } from "../utils/constants";
@@ -10,6 +10,9 @@ const Body = () => {
   const [copyResList, setCopyResList] = useState([]);
   const [searchText, setSearchText] = useState("");
   const onlineStatus = useOnlineStatus();
+
+  const RestaurantOpenCard = isOpenRestaurant(RestaurantCard);
+  console.log(listOfRestaurants);
 
   useEffect(() => {
     fetchData();
@@ -43,9 +46,7 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="">
-
-
-      <div className="flex m-6">
+      <div className="flex m-6 justify-center">
         <div className="flex">
           <input
             className="px-2 border rounded-sm focus:ring focus:ring-amber-300"
@@ -80,14 +81,17 @@ const Body = () => {
         </button>
       </div>
 
-
-      <div className="flex flex-wrap m-4">
+      <div className="flex flex-wrap m-4 justify-around mx-20">
         {copyResList.map((restaurant) => (
           <Link
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />{" "}
+            {restaurant.info.isOpen ? (
+              <RestaurantOpenCard resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>
