@@ -9,11 +9,17 @@ A functional food delivery web application built with **React** that fetches liv
 - **Top Rated Filter**: Filter restaurants with a rating of 4.5+ with a single click.
 - **Dynamic Routing**: View detailed menu for each restaurant.
 - **Shimmer UI**: Implements a shimmer loading effect for a better user experience while data is being fetched.
+- **Lazy Loading**: Optimized performance by lazy loading the Grocery and RestaurantMenu components (Code Splitting).
+- **Online Status**: Detects and displays the user's internet connection status.
+- **Context API**: Manages global state for logged-in user information.
+- **Higher-Order Components**: Enhances restaurant cards with labels (e.g., "Open").
 - **Client-Side Routing**: Single Page Application (SPA) navigation using **React Router v7**.
     - **Home**: Displays the list of restaurants.
     - **About**: Project/Author information.
     - **Contact**: Contact details.
+    - **Grocery**: A separate section for grocery items (Lazy Loaded).
     - **Restaurant Menu**: Displays menu items for a specific restaurant.
+    - **Developer**: Developer profile using Class Components.
     - **Error Page**: Custom error handling for invalid routes.
 - **Responsive Design**: Mobile-friendly restaurant card grid layout.
 
@@ -58,14 +64,19 @@ Food-Delivery-App/
 │   │   ├── About.jsx           # About page component
 │   │   ├── Body.jsx            # Main container with search & list logic
 │   │   ├── Contact.jsx         # Contact page component
+│   │   ├── Developer.jsx       # Developer page (Class Component)
 │   │   ├── Error.jsx           # Error page for 404s
 │   │   ├── Footer.jsx          # Site footer
+│   │   ├── Grocery.jsx         # Grocery page (Lazy Loaded)
 │   │   ├── Header.jsx          # Navigation header
 │   │   ├── RestaurantCard.jsx  # Individual restaurant display card
 │   │   ├── RestaurantMenu.jsx  # Restaurant menu page
 │   │   └── Shimmer.jsx         # Loading state component
+│   │   └── UserClass.jsx       # User class component
 │   ├── utils/
 │   │   └── constants.jsx       # Hardcoded strings/URLs
+│   │   ├── useOnlineStatus.js  # Custom hook for online status
+│   │   └── UserContext.js      # Context for user data
 │   └── App.jsx                 # Root component & Router config
 ├── images/                     # Static assets
 ├── index.css                   # Global styles
