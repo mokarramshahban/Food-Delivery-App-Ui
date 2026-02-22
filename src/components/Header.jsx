@@ -1,5 +1,5 @@
-import { LOGO_URL } from "../utils/constants";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
+import logo from "url:../images/logo.png";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
@@ -10,10 +10,11 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
   const { loggedInUser } = useContext(UserContext);
   const cartItems = useSelector ( (store)=> store.cart.items);
+  console.log(logo)
   return (
     <div className=" h-30 w-full flex bg-orange-100 shadow-lg">
-      <div className="w-[30%]">
-        <img className=" mx-4 w-30" src={LOGO_URL} alt="Food App Logo" />
+      <div className="w-[40%]">
+        <img className=" ml-10 w-30" src={logo} alt="Logo" />
       </div>
       <div className="flex">
         <ul className="flex items-center justify-between font-medium">
