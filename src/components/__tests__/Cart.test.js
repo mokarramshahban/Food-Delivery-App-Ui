@@ -26,7 +26,6 @@ const accordionHeader = screen.getByText("Recommended (19)")
 fireEvent.click(accordionHeader);
 
 const categoryList = screen.getAllByTestId("foodItems")
-expect(categoryList.length).toBeInTheDocument(19)
-
+expect(categoryList.length).toBe(19)
 
 });
