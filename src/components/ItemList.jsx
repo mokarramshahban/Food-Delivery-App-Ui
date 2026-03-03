@@ -9,10 +9,10 @@ const ItemList = ({ items }) => {
   };
   return (
     <div>
-      {items.map((item) => (
+      {items.map((item, index) => (
         <div
-        data-testid="foodItems"
-          key={item?.card?.info?.id}
+          data-testid="foodItems"
+          key={item?.card?.info?.id + "-" + index}
           className="p-2 m-2 border-b-2 border-gray-200 text-left text-lg py-2 flex"
         >
           <div className="w-9/12">
@@ -35,7 +35,7 @@ const ItemList = ({ items }) => {
               className="w-22 rounded bg-white absolute top-18 cursor-pointer"
               onClick={() => handleAddItem(item)}
             >
-              Add ➕
+              Add +
             </button>
           </div>
         </div>
